@@ -5,7 +5,7 @@ import connectionToDatabase from '@/lib/mongose'
 // Mark route as dynamic - required because we access request.cookies
 export const dynamic = 'force-dynamic'
 
-export async function POST(req: NextRequest) {
+export async function POST (req: NextRequest) {
   try {
     await connectionToDatabase()
 
