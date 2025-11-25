@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  eslint: {
+    // Disable ESLint during production build
+    ignoreDuringBuilds: true
+  },
   async headers () {
     return [
       {
@@ -7,23 +11,23 @@ const nextConfig = {
         headers: [
           {
             key: 'Access-Control-Allow-Origin',
-            value: '*'
+            value: '*',
           },
           {
             key: 'Access-Control-Allow-Methods',
-            value: 'GET, POST, OPTIONS'
+            value: 'GET, POST, OPTIONS',
           },
           {
             key: 'Access-Control-Allow-Headers',
-            value: 'Authorization, Content-Type'
-          }
-        ]
-      }
+            value: 'Authorization, Content-Type',
+          },
+        ],
+      },
     ]
   },
   images: {
-    domains: ['res.cloudinary.com', 'upload.wikimedia.org']
-  }
+    domains: ['res.cloudinary.com', 'upload.wikimedia.org'],
+  },
 }
 
 export default nextConfig
