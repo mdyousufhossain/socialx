@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { AuthService } from '@/lib/authService'
-import { connect } from 'http2'
 import connectionToDatabase from '@/lib/mongose'
 
 export async function POST (req: NextRequest) {

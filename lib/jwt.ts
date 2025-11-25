@@ -48,7 +48,6 @@ export async function verifyRefreshToken(token) {
   }
 }
 
-
 export function hasRequiredRole
 // @ts-ignore
 (userRole, requiredRole) {
@@ -61,7 +60,7 @@ export function hasExactRole
   return userRole === requiredRole
 }
 
-export function hasAnyRole 
+export function hasAnyRole
 // @ts-ignore
 (userRole, allowedRoles) {
   return allowedRoles.includes(userRole)
