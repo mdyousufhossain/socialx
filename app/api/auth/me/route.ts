@@ -1,6 +1,9 @@
 import { NextRequest } from 'next/server'
 import { AuthService } from '@/lib/authService'
 
+// Mark route as dynamic - required because we access request.cookies
+export const dynamic = 'force-dynamic'
+
 export async function GET (req: NextRequest) {
   try {
     const accessToken = req.cookies.get('accessToken')?.value

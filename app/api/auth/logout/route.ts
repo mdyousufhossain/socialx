@@ -2,7 +2,10 @@ import { NextRequest, NextResponse } from 'next/server'
 import { AuthService } from '@/lib/authService'
 import connectionToDatabase from '@/lib/mongose'
 
-export async function POST (req: NextRequest) {
+// Mark route as dynamic - required because we access request.cookies
+export const dynamic = 'force-dynamic'
+
+export async function POST(req: NextRequest) {
   try {
     await connectionToDatabase()
 
