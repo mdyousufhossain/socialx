@@ -6,21 +6,21 @@ import connectionToDatabase from '@/lib/mongose'
 // Mark route as dynamic - required because we access request.cookies
 export const dynamic = 'force-dynamic'
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST (req: NextRequest, res: NextResponse) {
   try {
     connectionToDatabase()
     const credentials = await req.json()
 
     const deviceInfo = {
       userAgent: req.headers.get('user-agent'),
-      ipAddress: req.headers.get('x-forwarded-for') || 'unknown',
+      ipAddress: req.headers.get('x-forwarded-for') || 'unknown'
     }
 
     const result = await AuthService.login(credentials, deviceInfo)
 
     const response = NextResponse.json({
       user: result.user,
-      message: 'Login successful',
+      message: 'Login successful'
     })
     // Set HTTP-only cookies
     response.cookies.set('accessToken', result.accessToken, {
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       secure: process.env.NODE_ENV === 'production', // Only send over HTTPS in production
       sameSite: 'strict', // Protects against CSRF
       maxAge: 900, // 15 minutes (in seconds)
-      path: '/', // Accessible across the whole application
+      path: '/' // Accessible across the whole application
     })
 
     // --- 4. Set the Refresh Token (Long-lived) ---
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
       maxAge: 604800, // 7 days (in seconds)
-      path: '/api/auth/refresh', // 🔑 Restricted to only the refresh endpoint (BEST PRACTICE)
+      path: '/api/auth/refresh' // 🔑 Restricted to only the refresh endpoint (BEST PRACTICE)
     })
 
     return response
